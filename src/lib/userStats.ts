@@ -38,8 +38,8 @@ export async function syncUserProfile(tgUid: string): Promise<UserProfile | null
 
     if (!profile) {
         // Create new profile
-        const { data: newProfile, error: createError } = await supabase
-            .from('user_profiles' as any)
+        const { data: newProfile, error: createError } = await (supabase
+            .from('user_profiles' as any) as any)
             .insert({
                 tg_uid: tgUid,
                 streak_days: 1,
