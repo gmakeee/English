@@ -34,7 +34,7 @@ export async function recordAnswer(
         const newWrong = isCorrect ? existing.wrong_count : existing.wrong_count + 1;
         const newConsecutive = isCorrect ? (existing.consecutive_correct || 0) + 1 : 0;
 
-        const totalAnswers = newCorrect + newWrong;
+
 
         // Logic: 
         // Learned if consecutive correct >= 3
@@ -53,7 +53,7 @@ export async function recordAnswer(
             .eq('word_id', wordId);
     } else {
         // Insert new record
-        const isLearned = isCorrect && 1 >= 3; // Impossible on first try
+
         await getTable()
             .insert({
                 tg_uid: tgUid,
