@@ -73,8 +73,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const userId = user?.id?.toString() ?? null;
     const username = user?.username ?? undefined;
     const firstName = user?.first_name || 'Гость';
-    const isCuteMode = hasCuteMode(username);
-    const isDevMode = hasDevMode(username);
+    const isCuteMode = hasCuteMode(user?.id, username);
+    const isDevMode = hasDevMode(user?.id, username);
 
     return (
         <UserContext.Provider value={{
