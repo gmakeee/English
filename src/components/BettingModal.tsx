@@ -17,12 +17,20 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                >
+                    {/* Solid backdrop */}
+                    <div className="absolute inset-0 bg-black/70" onClick={onClose} />
+
                     <motion.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
-                        className="bg-tg-bg w-full max-w-sm rounded-2xl p-6 shadow-xl border border-tg-hint/10"
+                        className="relative bg-tg-bg w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-tg-hint/20"
                     >
                         <h2 className="text-xl font-bold text-center mb-2">Сделай ставку! 🎲</h2>
                         <p className="text-center text-tg-hint text-sm mb-6">
@@ -35,11 +43,11 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                                     key={amount}
                                     onClick={() => setSelectedAmount(amount)}
                                     disabled={balance < amount}
-                                    className={`p-3 rounded-xl border-2 font-bold transition-all ${selectedAmount === amount
-                                            ? 'border-yellow-400 bg-yellow-400/10 text-yellow-600'
+                                    className={`p-4 rounded-xl border-2 font-bold transition-all ${selectedAmount === amount
+                                            ? 'border-yellow-400 bg-yellow-400/20 text-yellow-600'
                                             : balance < amount
-                                                ? 'border-tg-hint/20 text-tg-hint opacity-50 cursor-not-allowed'
-                                                : 'border-tg-hint/20 hover:border-tg-button/50'
+                                                ? 'border-tg-hint/20 text-tg-hint opacity-50 cursor-not-allowed bg-tg-secondary-bg'
+                                                : 'border-tg-hint/20 hover:border-tg-button/50 bg-tg-secondary-bg'
                                         }`}
                                 >
                                     {amount} 🪙
@@ -47,12 +55,16 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                             ))}
                         </div>
 
+                        <p className="text-center text-sm text-tg-hint mb-4">
+                            Баланс: <span className="font-bold text-tg-text">{balance} 🪙</span>
+                        </p>
+
                         <div className="flex gap-3">
                             <button
                                 onClick={onClose}
-                                className="flex-1 py-3 font-medium text-tg-hint hover:bg-tg-secondary-bg rounded-xl transition-colors"
+                                className="flex-1 py-3 font-medium text-tg-hint hover:bg-tg-secondary-bg rounded-xl transition-colors border border-tg-hint/20"
                             >
-                                Пропустить
+                                Без ставки
                             </button>
                             <button
                                 onClick={() => selectedAmount && onConfirm(selectedAmount)}
@@ -63,7 +75,7 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                             </button>
                         </div>
                     </motion.div>
-                </div>
+                </motion.div>
             )}
         </AnimatePresence>
     );
