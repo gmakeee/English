@@ -112,23 +112,26 @@ export async function logActivity(tgUid: string, xpAmount: number) {
     // Note: Supabase upsert needs a unique constraint on (tg_uid, activity_date)
 
     // First, verify current
-    const { data: existing } = await supabase
-        .from('user_daily_activity' as any)
+    const { data: existingData } = await (supabase
+        .from('user_daily_activity' as any) as any)
         .select('*')
         .eq('tg_uid', tgUid)
         .eq('activity_date', today)
         .single();
 
+    // Explicitly cast to avoid 'never' inference
+    const existing = existingData as any;
+
     const newXP = (existing?.xp_earned || 0) + xpAmount;
 
     if (existing) {
-        await supabase
-            .from('user_daily_activity' as any)
+        await (supabase
+            .from('user_daily_activity' as any) as any)
             .update({ xp_earned: newXP })
             .eq('id', existing.id);
     } else {
-        await supabase
-            .from('user_daily_activity' as any)
+        await (supabase
+            .from('user_daily_activity' as any) as any)
             .insert({
                 tg_uid: tgUid,
                 activity_date: today,
@@ -137,7 +140,7 @@ export async function logActivity(tgUid: string, xpAmount: number) {
     }
 
     // Also update total XP in profile
-    await supabase.rpc('increment_total_xp', { uid: tgUid, amount: xpAmount });
+    await (supabase as any).rpc('increment_total_xp', { uid: tgUid, amount: xpAmount });
     // Fallback if RPC doesn't exist (we didn't create it, so let's just use manual update for now)
     // Actually simpler: just don't track total_xp properly or do a read-modify-write. 
     // For now, let's skip total_xp update or do it simply:
