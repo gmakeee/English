@@ -46,7 +46,7 @@ export const EconomyProvider: React.FC<{ children: React.ReactNode }> = ({ child
         // Sync with DB
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-            await supabase.from('profiles').update({ balance: newBalance } as any).eq('id', user.id);
+            await (supabase.from('profiles') as any).update({ balance: newBalance }).eq('id', user.id);
         }
     };
 
