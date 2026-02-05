@@ -3,10 +3,12 @@ import BossBattle from '../components/BossBattle';
 import DailyWarmth from '../components/DailyWarmth';
 import toast from 'react-hot-toast';
 import { useEconomy } from '../context/EconomyContext';
+import { useUser } from '../context/UserContext';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
     const { balance } = useEconomy();
+    const { firstName, isCuteMode } = useUser();
 
     const handleEasterEgg = () => {
         if ((window as any).Telegram?.WebApp?.HapticFeedback) {
@@ -18,11 +20,16 @@ const Home = () => {
         });
     };
 
+    // Greeting based on user type
+    const greeting = isCuteMode
+        ? `Привет, ${firstName}! ❤️`
+        : `Привет, ${firstName}!`;
+
     return (
         <div className="space-y-6 pb-24">
             <header className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold">Привет, Лиза! ❤️</h1>
+                    <h1 className="text-2xl font-bold">{greeting}</h1>
                     <p className="text-tg-hint text-sm">Готова учиться?</p>
                 </div>
                 <div className="bg-tg-secondary-bg px-3 py-1 rounded-full text-sm font-medium">
@@ -30,7 +37,7 @@ const Home = () => {
                 </div>
             </header>
 
-            <DailyWarmth />
+            {isCuteMode && <DailyWarmth />}
 
             <WordOfDay
                 word="Serendipity"
@@ -48,7 +55,7 @@ const Home = () => {
 
             <BossBattle />
 
-            <div className="bg-tg-secondary-bg p-4 rounded-xl shadow-sm">
+            <div className="bg-tg-secondary-bg p-4 rounded-xl shadow-sm border border-[--tg-theme-hint-color]/10">
                 <p className="text-tg-hint text-sm">Цель на сегодня</p>
                 <p className="text-xl font-semibold">Выучить 10 новых слов</p>
                 <div className="mt-3">

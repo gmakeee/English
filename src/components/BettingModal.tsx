@@ -32,8 +32,8 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                         exit={{ scale: 0.9, opacity: 0 }}
                         className="relative bg-[#1c1c1e] w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-gray-600"
                     >
-                        <h2 className="text-xl font-bold text-center mb-2">Сделай ставку! 🎲</h2>
-                        <p className="text-center text-tg-hint text-sm mb-6">
+                        <h2 className="text-xl font-bold text-center mb-2 text-white">Сделай ставку! 🎲</h2>
+                        <p className="text-center text-gray-400 text-sm mb-6">
                             100% правильных ответов — ставка удвоится. Одна ошибка — потеряешь всё.
                         </p>
 
@@ -55,8 +55,8 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                             ))}
                         </div>
 
-                        <p className="text-center text-sm text-tg-hint mb-4">
-                            Баланс: <span className="font-bold text-tg-text">{balance} 🪙</span>
+                        <p className="text-center text-sm text-gray-400 mb-4">
+                            Баланс: <span className="font-bold text-white">{balance} 🪙</span>
                         </p>
 
                         <div className="flex gap-3">

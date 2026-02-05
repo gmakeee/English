@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Zap, BookOpen, Headphones } from 'lucide-react';
+import { Brain, Zap, BookOpen, Headphones, BookCheck, AlertTriangle } from 'lucide-react';
 import QuizGame from '../components/QuizGame';
 import SprintGame from '../components/SprintGame';
 import FillGapGame from '../components/FillGapGame';
 import DictationGame from '../components/DictationGame';
+import LearnedWords from './LearnedWords';
+import MistakesQuiz from '../components/MistakesQuiz';
 
-type GameMode = 'hub' | 'quiz' | 'sprint' | 'context' | 'dictation';
+type GameMode = 'hub' | 'quiz' | 'sprint' | 'context' | 'dictation' | 'learned' | 'mistakes';
 
 const GAME_CARDS = [
     {
@@ -40,6 +42,25 @@ const GAME_CARDS = [
         icon: Headphones,
         gradient: 'from-orange-500 to-red-600',
         emoji: '🎧'
+    },
+];
+
+const SPECIAL_CARDS = [
+    {
+        id: 'learned' as const,
+        title: 'Выученные',
+        description: 'Слова с точностью 80%+',
+        icon: BookCheck,
+        gradient: 'from-green-500 to-emerald-600',
+        emoji: '✅'
+    },
+    {
+        id: 'mistakes' as const,
+        title: 'Ошибки',
+        description: 'Работа над частыми ошибками',
+        icon: AlertTriangle,
+        gradient: 'from-orange-500 to-amber-600',
+        emoji: '🔄'
     },
 ];
 
@@ -86,6 +107,10 @@ const Learn = () => {
                         <DictationGame />
                     </div>
                 );
+            case 'learned':
+                return <LearnedWords onBack={() => setGameMode('hub')} />;
+            case 'mistakes':
+                return <MistakesQuiz onBack={() => setGameMode('hub')} />;
             default:
                 return null;
         }
@@ -122,7 +147,31 @@ const Learn = () => {
                 ))}
             </div>
 
-            <div className="bg-tg-secondary-bg rounded-xl p-4">
+            {/* Special modes section */}
+            <div>
+                <h2 className="font-bold text-lg mb-3">Повторение</h2>
+                <div className="grid grid-cols-2 gap-4">
+                    {SPECIAL_CARDS.map((card, index) => (
+                        <motion.button
+                            key={card.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: (GAME_CARDS.length + index) * 0.1 }}
+                            onClick={() => setGameMode(card.id)}
+                            className={`bg-gradient-to-br ${card.gradient} rounded-2xl p-4 text-white text-left shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform`}
+                        >
+                            <div className="flex justify-between items-start mb-3">
+                                <card.icon size={28} className="opacity-90" />
+                                <span className="text-2xl">{card.emoji}</span>
+                            </div>
+                            <h3 className="font-bold text-lg mb-1">{card.title}</h3>
+                            <p className="text-xs opacity-80 leading-tight">{card.description}</p>
+                        </motion.button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="bg-tg-secondary-bg rounded-xl p-4 border border-[--tg-theme-hint-color]/10">
                 <h3 className="font-bold mb-2">💡 Совет</h3>
                 <p className="text-sm text-tg-hint">
                     Правильные ответы в квизе наносят урон Боссу недели! Победи его, чтобы получить награду.

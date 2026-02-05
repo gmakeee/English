@@ -1,36 +1,43 @@
 import { useEconomy } from '../context/EconomyContext';
+import { useUser } from '../context/UserContext';
+import DevTools from '../components/DevTools';
 
 const Profile = () => {
     const { balance } = useEconomy();
+    const { firstName, isCuteMode } = useUser();
+
+    // Choose avatar based on mode
+    const avatarEmoji = isCuteMode ? '👸' : '🎓';
+    const subtitle = isCuteMode ? 'Королева английского' : 'Изучаю английский';
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 pb-24">
             <h1 className="text-2xl font-bold">Профиль</h1>
 
-            <div className="bg-tg-secondary-bg p-6 rounded-xl space-y-4">
+            <div className="bg-tg-secondary-bg p-6 rounded-xl space-y-4 border border-[--tg-theme-hint-color]/10">
                 <div className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center text-3xl">
-                        👸
+                        {avatarEmoji}
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold">Лиза</h2>
-                        <p className="text-tg-hint text-sm">Королева английского</p>
+                        <h2 className="text-xl font-bold">{firstName}</h2>
+                        <p className="text-tg-hint text-sm">{subtitle}</p>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-                <div className="bg-tg-secondary-bg p-4 rounded-xl text-center">
+                <div className="bg-tg-secondary-bg p-4 rounded-xl text-center border border-[--tg-theme-hint-color]/10">
                     <p className="text-3xl font-bold">{balance}</p>
                     <p className="text-tg-hint text-sm">LingoCoins 🪙</p>
                 </div>
-                <div className="bg-tg-secondary-bg p-4 rounded-xl text-center">
+                <div className="bg-tg-secondary-bg p-4 rounded-xl text-center border border-[--tg-theme-hint-color]/10">
                     <p className="text-3xl font-bold">5</p>
                     <p className="text-tg-hint text-sm">Дней подряд 🔥</p>
                 </div>
             </div>
 
-            <div className="bg-tg-secondary-bg p-4 rounded-xl">
+            <div className="bg-tg-secondary-bg p-4 rounded-xl border border-[--tg-theme-hint-color]/10">
                 <h3 className="font-bold mb-3">Достижения</h3>
                 <div className="flex gap-3 flex-wrap">
                     <span className="text-3xl" title="Первая победа">🏆</span>
@@ -41,7 +48,7 @@ const Profile = () => {
                 </div>
             </div>
 
-            <div className="bg-tg-secondary-bg p-4 rounded-xl">
+            <div className="bg-tg-secondary-bg p-4 rounded-xl border border-[--tg-theme-hint-color]/10">
                 <h3 className="font-bold mb-3">Статистика</h3>
                 <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -58,6 +65,9 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+
+            {/* DEV Tools - only shown for DEV mode users */}
+            <DevTools />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import { IMPORTED_WORDS as A2_DECK } from './imported_words_a2';
 import { IMPORTED_WORDS as B1_DECK } from './imported_words_b1';
-import { IMPORTED_WORDS as MOST_FREQ_DECK } from './imported_words_most_freq';
+import { IMPORTED_WORDS as B2_DECK } from './imported_words_b2';
 
 // A2/B1 Level Word Database
 // Words with Russian translations and example sentences
@@ -78,16 +78,16 @@ const MANUAL_WORDS: Word[] = [
 // Re-map IDs to avoid conflicts
 // A2: 10000+
 // B1: 20000+
-// Most Freq: 30000+
+// B2: 30000+
 const A2_MAPPED = A2_DECK.map(w => ({ ...w, id: 10000 + w.id }));
 const B1_MAPPED = B1_DECK.map(w => ({ ...w, id: 20000 + w.id }));
-const MOST_FREQ_MAPPED = MOST_FREQ_DECK.map(w => ({ ...w, id: 30000 + w.id }));
+const B2_MAPPED = B2_DECK.map(w => ({ ...w, id: 30000 + w.id }));
 
 export const WORDS_A2_B1: Word[] = [
     ...MANUAL_WORDS,
     ...A2_MAPPED,
     ...B1_MAPPED,
-    ...MOST_FREQ_MAPPED
+    ...B2_MAPPED
 ];
 
 // Sentences for Fill-in-the-Blank game

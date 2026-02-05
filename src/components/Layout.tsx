@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import BottomNav from './BottomNav';
 import HeartFab from './HeartFab';
 import { Toaster } from 'react-hot-toast';
+import { useUser } from '../context/UserContext';
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const { isCuteMode } = useUser();
+
     useEffect(() => {
         // Initialize Telegram Web App
         const tg = (window as any).Telegram?.WebApp;
@@ -32,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <main className="container mx-auto px-4 py-4 max-w-md">
                 {children}
             </main>
-            <HeartFab />
+            {isCuteMode && <HeartFab />}
             <BottomNav />
         </div>
     );
