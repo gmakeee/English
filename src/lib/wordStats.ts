@@ -10,7 +10,7 @@ interface WordStats {
 }
 
 // Type assertion helper since user_word_stats isn't in generated types yet
-const getTable = () => supabase.from('user_word_stats' as any);
+const getTable = () => supabase.from('user_word_stats' as any) as any;
 
 /**
  * Record an answer for word stats tracking
