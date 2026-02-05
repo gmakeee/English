@@ -30,10 +30,10 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
-                        className="relative bg-[#1c1c1e] w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-gray-600"
+                        className="relative bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-gray-200"
                     >
-                        <h2 className="text-xl font-bold text-center mb-2 text-white">Сделай ставку! 🎲</h2>
-                        <p className="text-center text-gray-400 text-sm mb-6">
+                        <h2 className="text-xl font-bold text-center mb-2 text-black">Сделай ставку! 🎲</h2>
+                        <p className="text-center text-gray-500 text-sm mb-6">
                             100% правильных ответов — ставка удвоится. Одна ошибка — потеряешь всё.
                         </p>
 
@@ -46,8 +46,8 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                                     className={`p-4 rounded-xl border-2 font-bold transition-all ${selectedAmount === amount
                                         ? 'border-yellow-400 bg-yellow-500 text-white'
                                         : balance < amount
-                                            ? 'border-gray-600 text-gray-500 opacity-50 cursor-not-allowed bg-[#2c2c2e]'
-                                            : 'border-gray-600 hover:border-yellow-400/50 bg-[#2c2c2e] text-white'
+                                            ? 'border-gray-200 text-gray-300 opacity-50 cursor-not-allowed bg-gray-50'
+                                            : 'border-gray-200 hover:border-yellow-400/50 bg-gray-50 text-black'
                                         }`}
                                 >
                                     {amount} 🪙
@@ -55,8 +55,8 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                             ))}
                         </div>
 
-                        <p className="text-center text-sm text-gray-400 mb-4">
-                            Баланс: <span className="font-bold text-white">{balance} 🪙</span>
+                        <p className="text-center text-sm text-gray-500 mb-4">
+                            Баланс: <span className="font-bold text-black">{balance} 🪙</span>
                         </p>
 
                         <div className="flex gap-3">

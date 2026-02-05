@@ -41,6 +41,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
         if (tg?.initDataUnsafe?.user) {
             const tgUser = tg.initDataUnsafe.user as TelegramUser;
             setUser(tgUser);
+        } else if (import.meta.env.DEV) {
+            // Mock user for local development
+            console.log('DEV Mode: Using mock Telegram user');
+            setUser({
+                id: 123456789,
+                first_name: "Dev User",
+                username: "gmakeee",
+                language_code: "en"
+            });
         }
 
         setIsLoading(false);
