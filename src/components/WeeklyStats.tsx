@@ -33,12 +33,12 @@ const WeeklyStats = () => {
 
     const getDayName = (dateStr: string) => {
         const date = new Date(dateStr);
-        return date.toLocaleDateString('en-US', { weekday: 'short' });
+        return date.toLocaleDateString('ru-RU', { weekday: 'short' });
     };
 
     return (
         <div className="bg-tg-secondary-bg p-6 rounded-xl border border-[--tg-theme-hint-color]/10">
-            <h3 className="font-bold mb-6">Activity</h3>
+            <h3 className="font-bold mb-6">Активность</h3>
 
             <div className="flex justify-between items-end h-32 gap-2">
                 {stats.map((day) => {

@@ -86,14 +86,17 @@ const BossBattle = () => {
             </div>
 
             {/* HP Bar */}
-            <div className="mb-3">
-                <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-bold text-red-500">HP</span>
-                    <span className="text-sm font-bold">{bossHP}/5</span>
-                </div>
-                <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="mb-3 relative">
+                <div className="w-full h-6 bg-gray-200 rounded-full overflow-hidden relative">
+                    {/* Background text for contrast (optional, but good for readability if bar is partial) */}
+                    <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <span className="text-xs font-bold text-white drop-shadow-md">
+                            {bossHP * 20}/100
+                        </span>
+                    </div>
+
                     <motion.div
-                        className="h-full bg-gradient-to-r from-red-500 to-red-600"
+                        className="h-full bg-gradient-to-r from-red-500 to-red-600 relative z-0"
                         animate={{ width: `${(bossHP / 5) * 100}%` }}
                         transition={{ type: 'spring', stiffness: 100 }}
                     />
