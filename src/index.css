@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   /* Default light theme constants (fallback) */
@@ -29,16 +27,19 @@
 body {
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
-  overscroll-behavior: none; /* Prevent rubber-banding on iOS */
+  overscroll-behavior: none;
+  /* Prevent rubber-banding on iOS */
 }
 
 /* Custom Scrollbar for Web */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--tg-theme-hint-color);
   border-radius: 3px;
