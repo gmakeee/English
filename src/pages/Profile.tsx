@@ -7,7 +7,7 @@ import { getUserStatsSummary } from '../lib/wordStats';
 
 const Profile = () => {
     const { balance } = useEconomy();
-    const { firstName, isCuteMode, userId, streak } = useUser();
+    const { firstName, isCuteMode, userId, streak, user, isDevMode } = useUser();
     const [stats, setStats] = useState({ learnedWords: 0, accuracy: 0, totalWords: 0 });
 
     useEffect(() => {
