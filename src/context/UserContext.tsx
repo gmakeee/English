@@ -18,6 +18,7 @@ interface UserContextType {
     isCuteMode: boolean;
     isDevMode: boolean;
     isLoading: boolean;
+    streak: number;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -28,11 +29,13 @@ const UserContext = createContext<UserContextType>({
     isCuteMode: false,
     isDevMode: false,
     isLoading: true,
+    streak: 0,
 });
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<TelegramUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [streak, setStreak] = useState(0);
 
     useEffect(() => {
         // Try to get user from Telegram WebApp
@@ -51,9 +54,21 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 language_code: "en"
             });
         }
-
         setIsLoading(false);
     }, []);
+
+    // Sync profile when user is set
+    useEffect(() => {
+        if (!user?.id) return;
+
+        import('../lib/userStats').then(({ syncUserProfile }) => {
+            syncUserProfile(user.id.toString()).then(profile => {
+                if (profile) {
+                    setStreak(profile.streak_days);
+                }
+            });
+        });
+    }, [user?.id]);
 
     const userId = user?.id?.toString() ?? null;
     const username = user?.username ?? undefined;
@@ -70,6 +85,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             isCuteMode,
             isDevMode,
             isLoading,
+            streak,
         }}>
             {children}
         </UserContext.Provider>

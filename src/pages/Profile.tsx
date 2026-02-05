@@ -1,10 +1,20 @@
+import { useState, useEffect } from 'react';
 import { useEconomy } from '../context/EconomyContext';
 import { useUser } from '../context/UserContext';
 import DevTools from '../components/DevTools';
+import WeeklyStats from '../components/WeeklyStats';
+import { getUserStatsSummary } from '../lib/wordStats';
 
 const Profile = () => {
     const { balance } = useEconomy();
-    const { firstName, isCuteMode } = useUser();
+    const { firstName, isCuteMode, userId, streak } = useUser();
+    const [stats, setStats] = useState({ learnedWords: 0, accuracy: 0, totalWords: 0 });
+
+    useEffect(() => {
+        if (userId) {
+            getUserStatsSummary(userId).then(setStats);
+        }
+    }, [userId]);
 
     // Choose avatar based on mode
     const avatarEmoji = isCuteMode ? '👸' : '🎓';
@@ -32,7 +42,7 @@ const Profile = () => {
                     <p className="text-tg-hint text-sm">LingoCoins 🪙</p>
                 </div>
                 <div className="bg-tg-secondary-bg p-4 rounded-xl text-center border border-[--tg-theme-hint-color]/10">
-                    <p className="text-3xl font-bold">5</p>
+                    <p className="text-3xl font-bold">{streak}</p>
                     <p className="text-tg-hint text-sm">Дней подряд 🔥</p>
                 </div>
             </div>
@@ -48,16 +58,19 @@ const Profile = () => {
                 </div>
             </div>
 
+            {/* Weekly Activity Chart */}
+            <WeeklyStats />
+
             <div className="bg-tg-secondary-bg p-4 rounded-xl border border-[--tg-theme-hint-color]/10">
                 <h3 className="font-bold mb-3">Статистика</h3>
                 <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                         <span className="text-tg-hint">Слов изучено</span>
-                        <span className="font-medium">42</span>
+                        <span className="font-medium">{stats.learnedWords}</span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-tg-hint">Точность ответов</span>
-                        <span className="font-medium">87%</span>
+                        <span className="font-medium">{stats.accuracy}%</span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-tg-hint">Боссов повержено</span>
@@ -68,6 +81,16 @@ const Profile = () => {
 
             {/* DEV Tools - only shown for DEV mode users */}
             <DevTools />
+
+            {/* Debug Info for User Feedback */}
+            <div className="mt-8 p-4 bg-black/5 rounded-lg text-xs font-mono text-tg-hint break-all">
+                <p>Debug Info:</p>
+                <p>ID: {userId || 'null'}</p>
+                <p>Username: {user?.username || 'undefined'}</p>
+                <p>Dev: {isDevMode ? 'YES' : 'NO'}</p>
+                <p>Cute: {isCuteMode ? 'YES' : 'NO'}</p>
+                <p>Streak: {streak}</p>
+            </div>
         </div>
     );
 };

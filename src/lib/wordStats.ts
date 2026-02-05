@@ -5,6 +5,7 @@ interface WordStats {
     word_id: number;
     correct_count: number;
     wrong_count: number;
+    consecutive_correct?: number;
     last_seen: string;
     is_learned: boolean;
 }
@@ -31,32 +32,46 @@ export async function recordAnswer(
         // Update existing record
         const newCorrect = isCorrect ? existing.correct_count + 1 : existing.correct_count;
         const newWrong = isCorrect ? existing.wrong_count : existing.wrong_count + 1;
-        const totalAnswers = newCorrect + newWrong;
-        const successRate = newCorrect / totalAnswers;
+        const newConsecutive = isCorrect ? (existing.consecutive_correct || 0) + 1 : 0;
 
-        // Mark as learned if 80%+ accuracy with at least 5 answers
-        const isLearned = totalAnswers >= 5 && successRate >= 0.8;
+        const totalAnswers = newCorrect + newWrong;
+
+        // Logic: 
+        // Learned if consecutive correct >= 3
+        // (User rule: if 3 times correctly press -> learned)
+        const isLearned = newConsecutive >= 3;
 
         await getTable()
             .update({
                 correct_count: newCorrect,
                 wrong_count: newWrong,
+                consecutive_correct: newConsecutive,
                 last_seen: new Date().toISOString(),
-                is_learned: isLearned,
+                is_learned: isLearned, // Can re-learn if previously unlearned? Yes.
             } as any)
             .eq('tg_uid', tgUid)
             .eq('word_id', wordId);
     } else {
         // Insert new record
+        const isLearned = isCorrect && 1 >= 3; // Impossible on first try
         await getTable()
             .insert({
                 tg_uid: tgUid,
                 word_id: wordId,
                 correct_count: isCorrect ? 1 : 0,
                 wrong_count: isCorrect ? 0 : 1,
+                consecutive_correct: isCorrect ? 1 : 0,
                 last_seen: new Date().toISOString(),
                 is_learned: false,
             } as any);
+    }
+
+    // Log activity (XP) for chart
+    if (isCorrect) {
+        // Dynamic import to avoid circular dependency issues if any
+        import('./userStats').then(({ logActivity }) => {
+            logActivity(tgUid, 10); // 10 XP per correct word
+        });
     }
 }
 
@@ -88,7 +103,7 @@ export async function getMistakeWords(
     const { data, error } = await getTable()
         .select('*')
         .eq('tg_uid', tgUid)
-        .gt('wrong_count', 0)
+        .gte('wrong_count', 3) // User rule: 3 mistakes -> falls to mistakes
         .eq('is_learned', false)
         .order('wrong_count', { ascending: false })
         .limit(limit) as { data: WordStats[] | null; error: any };
