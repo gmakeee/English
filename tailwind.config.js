@@ -4,6 +4,7 @@ export default {
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
+    darkMode: 'class', // Force manual dark mode (effectively disables system dark mode unless class is added)
     theme: {
         extend: {
             colors: {
