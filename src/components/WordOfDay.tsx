@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -44,7 +44,7 @@ const WordOfDay: React.FC<WordOfDayProps> = ({ word, translation, example, onEas
                 <Volume2 size={48} />
             </div>
 
-            <span className="text-xs uppercase tracking-wider opacity-80 font-semibold">Word of the Day</span>
+            <span className="text-xs uppercase tracking-wider opacity-80 font-semibold">Слово дня</span>
 
             <div className="mt-4 mb-2">
                 <h2 className="text-3xl font-bold tracking-tight">{word}</h2>

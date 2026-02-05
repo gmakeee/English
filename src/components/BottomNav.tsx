@@ -4,9 +4,9 @@ import clsx from 'clsx';
 
 const BottomNav = () => {
     const navItems = [
-        { icon: Home, label: 'Home', path: '/' },
-        { icon: BookOpen, label: 'Learn', path: '/learn' },
-        { icon: User, label: 'Profile', path: '/profile' },
+        { icon: Home, label: 'Главная', path: '/' },
+        { icon: BookOpen, label: 'Учить', path: '/learn' },
+        { icon: User, label: 'Профиль', path: '/profile' },
     ];
 
     return (

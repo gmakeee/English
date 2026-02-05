@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEconomy } from '../context/EconomyContext';
 
@@ -24,9 +24,9 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                         exit={{ scale: 0.9, opacity: 0 }}
                         className="bg-tg-bg w-full max-w-sm rounded-2xl p-6 shadow-xl border border-tg-hint/10"
                     >
-                        <h2 className="text-xl font-bold text-center mb-2">Place your bet! 🎲</h2>
+                        <h2 className="text-xl font-bold text-center mb-2">Сделай ставку! 🎲</h2>
                         <p className="text-center text-tg-hint text-sm mb-6">
-                            Win 100% correct answers to double it. One mistake - you lose it.
+                            100% правильных ответов — ставка удвоится. Одна ошибка — потеряешь всё.
                         </p>
 
                         <div className="grid grid-cols-3 gap-3 mb-6">
@@ -52,14 +52,14 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                                 onClick={onClose}
                                 className="flex-1 py-3 font-medium text-tg-hint hover:bg-tg-secondary-bg rounded-xl transition-colors"
                             >
-                                Skip
+                                Пропустить
                             </button>
                             <button
                                 onClick={() => selectedAmount && onConfirm(selectedAmount)}
                                 disabled={!selectedAmount}
                                 className="flex-1 py-3 font-bold bg-tg-button text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-tg-button/30"
                             >
-                                Let's Play!
+                                Играть!
                             </button>
                         </div>
                     </motion.div>

@@ -38,8 +38,8 @@ const BossBattle = () => {
                 className="bg-green-500/10 border border-green-500/50 rounded-xl p-6 text-center"
             >
                 <div className="text-4xl mb-2">🏆</div>
-                <h3 className="text-xl font-bold text-green-500">Boss Defeated!</h3>
-                <p className="text-sm opacity-80">+50 Bonus Coins</p>
+                <h3 className="text-xl font-bold text-green-500">Босс побеждён!</h3>
+                <p className="text-sm opacity-80">+50 бонусных монет</p>
             </motion.div>
         );
     }
@@ -47,8 +47,8 @@ const BossBattle = () => {
     return (
         <div className="bg-tg-secondary-bg rounded-xl p-6 relative overflow-hidden">
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <span className="text-red-500 font-black">BOSS FIGHT</span>
-                <span className="text-xs bg-red-500/20 text-red-500 px-2 py-0.5 rounded-full">Weekly Alert</span>
+                <span className="text-red-500 font-black">БОСС НЕДЕЛИ</span>
+                <span className="text-xs bg-red-500/20 text-red-500 px-2 py-0.5 rounded-full">Еженедельно</span>
             </h3>
 
             <div className="flex justify-center items-center py-8 relative">
@@ -78,7 +78,7 @@ const BossBattle = () => {
             </div>
 
             <p className="text-center text-xs text-tg-hint mt-3">
-                Answer 5 questions correctly in a row to defeat!
+                Ответь правильно 5 раз подряд, чтобы победить!
             </p>
         </div>
     );

@@ -7,8 +7,11 @@ const MESSAGES = [
     "Горжусь твоим прогрессом, Лиза!",
     "Самая красивая девушка в мире учит английский прямо сейчас!",
     "Ты делаешь этот мир лучше, просто будучи собой.",
-    "Every day you get better and better!",
-    "I believe in you, my love!",
+    "С каждым днём ты становишься лучше и лучше!",
+    "Верю в тебя, ты справишься! 💪",
+    "Ты — лучшее, что случилось в этом мире! ✨",
+    "Ты невероятная! Продолжай в том же духе!",
+    "Солнышко, ты сияешь ярче всех! ☀️",
 ];
 
 const DailyWarmth = () => {
@@ -21,7 +24,7 @@ const DailyWarmth = () => {
         <div className="bg-pink-100 dark:bg-pink-900/30 border border-pink-200 dark:border-pink-500/20 rounded-xl p-4 flex items-start gap-3">
             <Heart className="text-pink-500 fill-pink-500 shrink-0 mt-1" size={20} />
             <div>
-                <h4 className="font-bold text-pink-700 dark:text-pink-300 text-sm mb-1">Message for Liza</h4>
+                <h4 className="font-bold text-pink-700 dark:text-pink-300 text-sm mb-1">Сообщение для Лизы</h4>
                 <p className="text-pink-900 dark:text-pink-100 font-medium italic text-lg leading-tight">
                     "{message}"
                 </p>

@@ -4,13 +4,16 @@ import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
 
 const CUTE_PHRASES = [
-    "You are amazing! ✨",
-    "Keep going, sunshine! ☀️",
-    "Smart & Beautiful! 🧠💅",
-    "My heart beats for you! 💓",
-    "English Queen! 👑",
-    "Don't give up! 💪",
-    "I love you! ❤️",
+    "Ты невероятная! ✨",
+    "Продолжай, солнышко! ☀️",
+    "Умная и красивая! 🧠💅",
+    "Ты — лучшая на свете! 💓",
+    "Королева английского! 👑",
+    "Не сдавайся! 💪",
+    "Ты справишься! ❤️",
+    "Горжусь тобой! 🌟",
+    "Ты сияешь! ✨",
+    "Лучшая девушка! 💖",
 ];
 
 const HeartFab = () => {

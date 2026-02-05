@@ -30,32 +30,31 @@ const SprintGame = () => {
                 <div>
                     <h3 className="text-2xl font-bold flex items-center gap-2">
                         <Zap className="fill-yellow-400 text-yellow-400" />
-                        Sprint
+                        Спринт
                     </h3>
-                    <p className="opacity-80 text-sm">Match words against time!</p>
+                    <p className="opacity-80 text-sm">Переводи слова на скорость!</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-lg font-mono text-xl font-bold flex items-center gap-2">
                     <Timer size={18} />
-                    {timeLeft}s
+                    {timeLeft}с
                 </div>
             </div>
 
             {!isPlaying ? (
                 <div className="text-center py-8">
                     <p className="text-4xl font-black mb-2">{score}</p>
-                    <p className="opacity-70 text-sm mb-6">Last Score</p>
+                    <p className="opacity-70 text-sm mb-6">Последний счёт</p>
                     <button
                         onClick={startGame}
                         className="w-full bg-white text-indigo-600 font-bold py-3 rounded-xl shadow-lg active:scale-95 transition-transform"
                     >
-                        Start Sprint 🚀
+                        Начать спринт 🚀
                     </button>
                 </div>
             ) : (
                 <div className="h-40 flex items-center justify-center border-2 border-white/20 rounded-xl bg-white/5 backdrop-blur-sm">
-                    {/* Game Logic Placeholder */}
                     <div className="text-center">
-                        <p className="text-sm opacity-50 uppercase tracking-widest mb-2">Translate</p>
+                        <p className="text-sm opacity-50 uppercase tracking-widest mb-2">Переведи</p>
                         <h2 className="text-3xl font-bold">Cat</h2>
                         <div className="grid grid-cols-2 gap-2 mt-4 w-full px-4">
                             <button className="bg-white/20 hover:bg-white/30 p-2 rounded-lg" onClick={() => setScore(s => s + 10)}>Кошка</button>
