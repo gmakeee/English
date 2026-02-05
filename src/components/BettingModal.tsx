@@ -30,7 +30,7 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
-                        className="relative bg-tg-bg w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-tg-hint/20"
+                        className="relative bg-[#1c1c1e] w-full max-w-sm rounded-2xl p-6 shadow-2xl border border-gray-600"
                     >
                         <h2 className="text-xl font-bold text-center mb-2">Сделай ставку! 🎲</h2>
                         <p className="text-center text-tg-hint text-sm mb-6">
@@ -44,10 +44,10 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                                     onClick={() => setSelectedAmount(amount)}
                                     disabled={balance < amount}
                                     className={`p-4 rounded-xl border-2 font-bold transition-all ${selectedAmount === amount
-                                            ? 'border-yellow-400 bg-yellow-400/20 text-yellow-600'
-                                            : balance < amount
-                                                ? 'border-tg-hint/20 text-tg-hint opacity-50 cursor-not-allowed bg-tg-secondary-bg'
-                                                : 'border-tg-hint/20 hover:border-tg-button/50 bg-tg-secondary-bg'
+                                        ? 'border-yellow-400 bg-yellow-500 text-white'
+                                        : balance < amount
+                                            ? 'border-gray-600 text-gray-500 opacity-50 cursor-not-allowed bg-[#2c2c2e]'
+                                            : 'border-gray-600 hover:border-yellow-400/50 bg-[#2c2c2e] text-white'
                                         }`}
                                 >
                                     {amount} 🪙
@@ -62,7 +62,7 @@ const BettingModal: React.FC<BettingModalProps> = ({ isOpen, onClose, onConfirm 
                         <div className="flex gap-3">
                             <button
                                 onClick={onClose}
-                                className="flex-1 py-3 font-medium text-tg-hint hover:bg-tg-secondary-bg rounded-xl transition-colors border border-tg-hint/20"
+                                className="flex-1 py-3 font-medium text-gray-300 hover:bg-[#3c3c3e] bg-[#2c2c2e] rounded-xl transition-colors border border-gray-600"
                             >
                                 Без ставки
                             </button>

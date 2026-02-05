@@ -51,6 +51,18 @@ const Home = () => {
             <div className="bg-tg-secondary-bg p-4 rounded-xl shadow-sm">
                 <p className="text-tg-hint text-sm">Цель на сегодня</p>
                 <p className="text-xl font-semibold">Выучить 10 новых слов</p>
+                <div className="mt-3">
+                    <div className="flex justify-between text-xs text-tg-hint mb-1">
+                        <span>Прогресс</span>
+                        <span>0 / 10</span>
+                    </div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                            className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transition-all duration-500"
+                            style={{ width: '0%' }}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );
