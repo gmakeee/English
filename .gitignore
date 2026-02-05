@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Anki Import
+*.apkg
+temp_anki_extract*

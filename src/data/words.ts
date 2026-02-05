@@ -1,3 +1,7 @@
+import { IMPORTED_WORDS as A2_DECK } from './imported_words_a2';
+import { IMPORTED_WORDS as B1_DECK } from './imported_words_b1';
+import { IMPORTED_WORDS as MOST_FREQ_DECK } from './imported_words_most_freq';
+
 // A2/B1 Level Word Database
 // Words with Russian translations and example sentences
 
@@ -9,7 +13,7 @@ export interface Word {
     options: string[]; // 4 options including correct answer
 }
 
-export const WORDS_A2_B1: Word[] = [
+const MANUAL_WORDS: Word[] = [
     // Common Verbs
     { id: 1, word: "achieve", translation: "достигать", example: "She worked hard to achieve her goals.", options: ["достигать", "терять", "забывать", "начинать"] },
     { id: 2, word: "allow", translation: "разрешать", example: "My parents allow me to stay up late.", options: ["запрещать", "разрешать", "просить", "требовать"] },
@@ -71,6 +75,21 @@ export const WORDS_A2_B1: Word[] = [
     { id: 50, word: "independent", translation: "независимый", example: "She is very independent.", options: ["зависимый", "независимый", "слабый", "глупый"] },
 ];
 
+// Re-map IDs to avoid conflicts
+// A2: 10000+
+// B1: 20000+
+// Most Freq: 30000+
+const A2_MAPPED = A2_DECK.map(w => ({ ...w, id: 10000 + w.id }));
+const B1_MAPPED = B1_DECK.map(w => ({ ...w, id: 20000 + w.id }));
+const MOST_FREQ_MAPPED = MOST_FREQ_DECK.map(w => ({ ...w, id: 30000 + w.id }));
+
+export const WORDS_A2_B1: Word[] = [
+    ...MANUAL_WORDS,
+    ...A2_MAPPED,
+    ...B1_MAPPED,
+    ...MOST_FREQ_MAPPED
+];
+
 // Sentences for Fill-in-the-Blank game
 export interface SentenceGap {
     id: number;
@@ -116,9 +135,34 @@ export function shuffleArray<T>(array: T[]): T[] {
     return shuffled;
 }
 
-// Get random words for quiz
+// Helper to ensure word has valid options
+function ensureOptions(word: Word, allWords: Word[]): Word {
+    // Check if options are valid (not placeholders and length is 4)
+    const validOptions = word.options &&
+        word.options.length === 4 &&
+        !word.options.includes("...") &&
+        new Set(word.options).size === 4;
+
+    if (validOptions) return word;
+
+    // Generate new options
+    const correctScale = word.translation;
+    const otherWords = allWords.filter(w => w.id !== word.id);
+    const randomWrong = shuffleArray(otherWords).slice(0, 3).map(w => w.translation);
+
+    // Combine and shuffle
+    const newOptions = shuffleArray([correctScale, ...randomWrong]);
+
+    return { ...word, options: newOptions };
+}
+
+// Get random words for quiz with hydrated options
 export function getRandomWords(count: number): Word[] {
-    return shuffleArray(WORDS_A2_B1).slice(0, count);
+    const shuffled = shuffleArray(WORDS_A2_B1);
+    const selected = shuffled.slice(0, count);
+
+    // Ensure all selected words have valid options
+    return selected.map(w => ensureOptions(w, WORDS_A2_B1));
 }
 
 // Get random sentences for fill-gap game
