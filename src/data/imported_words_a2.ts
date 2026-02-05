@@ -1,4 +1,4 @@
-import { Word } from './words';
+import type { Word } from './words';
 
 export const IMPORTED_WORDS: Word[] = [
   { id: 2000, word: "ability", translation: "способность, умение, талант", example: "Example with ability", options: ["способность, умение, талант", "...", "...", "..."] },

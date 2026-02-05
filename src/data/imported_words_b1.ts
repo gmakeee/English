@@ -1,4 +1,4 @@
-import { Word } from './words';
+import type { Word } from './words';
 
 export const IMPORTED_WORDS: Word[] = [
   { id: 2000, word: "absolutely", translation: "абсолютно, совершенно", example: "Example with absolutely", options: ["абсолютно, совершенно", "...", "...", "..."] },

@@ -125,7 +125,7 @@ def extract_anki_deck(apkg_path, output_ts_path='src/data/imported_words.ts'):
         conn.close()
 
         # Generate TypeScript output
-        ts_content = "import { Word } from './words';\n\n"
+        ts_content = "import type { Word } from './words';\n\n"
         ts_content += "export const IMPORTED_WORDS: Word[] = [\n"
         
         for w in words:
