@@ -25,8 +25,8 @@ export async function syncUserProfile(tgUid: string): Promise<UserProfile | null
     const today = getTodayDate();
 
     // 1. Fetch existing
-    const { data: profile, error } = await supabase
-        .from('user_profiles' as any)
+    const { data: profile, error } = await (supabase
+        .from('user_profiles' as any) as any)
         .select('*')
         .eq('tg_uid', tgUid)
         .single();
@@ -76,8 +76,8 @@ export async function syncUserProfile(tgUid: string): Promise<UserProfile | null
 
     // Update if needed
     if (lastActive !== today || newStreak !== profile.streak_days) {
-        const { data: updated } = await supabase
-            .from('user_profiles' as any)
+        const { data: updated } = await (supabase
+            .from('user_profiles' as any) as any)
             .update({
                 streak_days: newStreak,
                 last_active_date: today
@@ -96,8 +96,8 @@ export async function syncUserProfile(tgUid: string): Promise<UserProfile | null
  * Update Boss HP in DB
  */
 export async function updateBossHP(tgUid: string, hp: number) {
-    await supabase
-        .from('user_profiles' as any)
+    await (supabase
+        .from('user_profiles' as any) as any)
         .update({ boss_hp: hp })
         .eq('tg_uid', tgUid);
 }
