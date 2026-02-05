@@ -88,28 +88,28 @@ const BossBattle = () => {
             {/* HP Bar */}
             <div className="mb-3 relative">
                 <div className="w-full h-6 bg-gray-200 rounded-full overflow-hidden relative">
-                    {/* Background text for contrast (optional, but good for readability if bar is partial) */}
+                    {/* Background text for contrast */}
                     <div className="absolute inset-0 flex items-center justify-center z-10">
                         <span className="text-xs font-bold text-white drop-shadow-md">
-                            {bossHP * 20}/100
+                            {bossHP}/100
                         </span>
                     </div>
 
                     <motion.div
                         className="h-full bg-gradient-to-r from-red-500 to-red-600 relative z-0"
-                        animate={{ width: `${(bossHP / 5) * 100}%` }}
+                        animate={{ width: `${bossHP}%` }}
                         transition={{ type: 'spring', stiffness: 100 }}
                     />
                 </div>
             </div>
 
-            {/* HP Hearts */}
+            {/* HP Hearts (5 hearts, 20 HP each) */}
             <div className="flex justify-center gap-1 mb-3">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <motion.span
                         key={i}
-                        animate={{ scale: i < bossHP ? 1 : 0.7 }}
-                        className={`text-xl ${i < bossHP ? '' : 'grayscale opacity-30'}`}
+                        animate={{ scale: ((i + 1) * 20) <= bossHP ? 1 : 0.7 }}
+                        className={`text-xl ${((i + 1) * 20) <= bossHP ? '' : 'grayscale opacity-30'}`}
                     >
                         ❤️
                     </motion.span>

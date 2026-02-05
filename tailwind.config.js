@@ -9,13 +9,13 @@ export default {
         extend: {
             colors: {
                 tg: {
-                    bg: 'var(--tg-theme-bg-color)',
-                    text: 'var(--tg-theme-text-color)',
-                    hint: 'var(--tg-theme-hint-color)',
-                    link: 'var(--tg-theme-link-color)',
-                    button: 'var(--tg-theme-button-color)',
-                    'button-text': 'var(--tg-theme-button-text-color)',
-                    'secondary-bg': 'var(--tg-theme-secondary-bg-color)',
+                    bg: '#ffffff',
+                    text: '#000000',
+                    hint: '#999999',
+                    link: '#2481cc',
+                    button: '#3390ec',
+                    'button-text': '#ffffff',
+                    'secondary-bg': '#f4f4f5',
                 }
             }
         },
